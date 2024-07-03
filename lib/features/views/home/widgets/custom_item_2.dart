@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../models/article_models.dart';
 
@@ -16,7 +17,13 @@ class CustomItem2 extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-              Container(
+          // Replace it with CachedNetworkImage
+          articleModel.image == null
+              ? SizedBox(
+                  height: 100,
+                  width: MediaQuery.sizeOf(context).width / 2,
+                  child: const Icon(Icons.photo, size: 50))
+              : Container(
                   height: 100,
                   width: MediaQuery.sizeOf(context).width / 2,
                   decoration: BoxDecoration(
@@ -53,7 +60,8 @@ class CustomItem2 extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        articleModel.data ?? 'date',
+                        DateFormat.yMMMd().format(
+                            DateTime.parse(articleModel.data ?? 'date')),
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,

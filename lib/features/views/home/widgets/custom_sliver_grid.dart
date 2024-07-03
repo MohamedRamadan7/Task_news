@@ -2,38 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../../../models/article_models.dart';
 import 'custom_item.dart';
+import 'loading_indicator.dart';
 
 class CustomSliverGrid extends StatelessWidget {
   const CustomSliverGrid({
     super.key,
+    required this.items,
+    this.isLoding = false,
   });
-  static List<ArticleModel> items = [
-    ArticleModel(
-      title: 'title',
-      image: 'https://cdn.arstechnica.net/wp-content/uploads/2013/09/IDI_014-640x215.jpg',
-      description: 'description',
-      data: 'data',
-    ),
-        ArticleModel(
-      title: 'title',
-      image: 'https://cdn.arstechnica.net/wp-content/uploads/2013/09/IDI_014-640x215.jpg',
-      description: 'description',
-      data: 'data',
-    ),    ArticleModel(
-      title: 'title',
-      image: 'https://cdn.arstechnica.net/wp-content/uploads/2013/09/IDI_014-640x215.jpg',
-      description: 'description',
-      data: 'data',
-    ),    ArticleModel(
-      title: 'title',
-      image: 'https://cdn.arstechnica.net/wp-content/uploads/2013/09/IDI_014-640x215.jpg',
-      description: 'description',
-      data: 'data',
-    ),
-  ];
+  final List<ArticleModel> items;
+  final bool isLoding;
   @override
   Widget build(BuildContext context) {
-    return SliverGrid.builder(
+    return isLoding
+        ? const SliverToBoxAdapter(child: LoadingIndicator())
+        : SliverGrid.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 15,
